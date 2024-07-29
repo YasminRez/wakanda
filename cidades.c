@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "cidades.h"
@@ -20,6 +20,24 @@ void ordenarCidades(Estrada *estrada) {
         estrada->C[i] = temp;
     }
 }
+
+void ordenarCidades(int *E, int N) {
+    //quicksort
+    for (int i = 0; i < N; i++) {
+        int minIndex = i;
+
+        for (int j = i + 1; j < N; j++) {
+            if (E[j] < E[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        int temp = E[minIndex];
+        E[minIndex] = E[i];
+        E[i] = temp;
+    }
+}
+
 
 void calcularDivisas(Estrada *estrada, double *pontoDivisa, double *areaCidade) {
     //calculo quantidade de divisas
@@ -101,7 +119,6 @@ Estrada *getEstrada(const char *NomeArquivo) {
     return x;
 }
 
-
 double calcularMenorVizinhanca(const char *nomeArquivo) {
     Estrada *estrada = getEstrada(nomeArquivo);
 
@@ -148,4 +165,51 @@ char *cidadeMenorVizinhanca(const char *nomeArquivo) {
     free(estrada);
 
     return nomeMenorCidade;
+}*/
+
+/*#include <stdio.h>
+#include <stdlib.h>
+#include "cidades.h" // Suponha que aqui estejam as definições de Estrada e Cidade
+
+*Estrada *getEstrada(const char *NomeArquivo) {
+    FILE *file = fopen(NomeArquivo, "r");
+    Estrada *estrada = (Estrada *)malloc(sizeof(Estrada));
+
+    fscanf(file, "%d", &estrada->T);
+    fscanf(file, "%d", &estrada->N);
+    estrada->C = (Cidade *)malloc(estrada->N * sizeof(Cidade));
+
+    for(int i = 0; i < estrada->N; i++){
+        fscanf(file, "%d %s", &estrada->C[i].Posicao, estrada->C[i].Nome);
+        printf("%s ", estrada->C[i].Nome);
+    }
+
+    fclose(file);
+    return estrada;
+
 }
+// Função principal (main) para testar a função getEstrada
+int main() {
+    // Chama a função getEstrada para ler os dados do arquivo "cidades.txt"
+    Estrada *T1 = getEstrada("cidades.txt");
+    if (T1 == NULL) {
+        printf("Erro ao ler dados da estrada.\n");
+        return 1; // Saída com erro
+    }
+
+    // Imprime os dados da estrada lidos pelo arquivo
+    printf("Dados da estrada lidos:\n");
+    printf("T: %d\n", T1->T);
+    printf("N: %d\n", T1->N);
+    printf("Cidades:\n");
+    for (int i = 0; i < T1->N; i++) {
+        printf("%d %s\n", T1->C[i].Posicao, T1->C[i].Nome);
+    }
+
+    // Libera a memória alocada para T1
+    free(T1->C); // Libera primeiro o array de Cidades
+    free(T1);    // Finalmente, libera a estrutura Estrada
+
+    return 0;
+}*/
+
